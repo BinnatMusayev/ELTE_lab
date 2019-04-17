@@ -7,12 +7,66 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ExpandableListView;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class Teachers_Fragment extends Fragment {
+
+    private ExpandableListView expandableListView;
+    private ExpandableTeachersListAdapter expandableTeachersListAdapter;
+    private List<String> listHeader;
+    private HashMap<String, List<String>> listHashMap;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_teachers, container, false);
+        View view = inflater.inflate(R.layout.fragment_teachers, container, false);
+
+        expandableListView = view.findViewById(R.id.teachers_expandable_list_view);
+        initData();
+        expandableTeachersListAdapter = new ExpandableTeachersListAdapter(getActivity(), listHeader, listHashMap);
+        expandableListView.setAdapter(expandableTeachersListAdapter);
+
+        return view;
+    }
+
+    private void initData(){
+
+        // get data from SQLLite - Room
+
+        listHeader = new ArrayList<>();
+        listHashMap = new HashMap<>();
+
+        listHeader.add("Robert");
+        listHeader.add("Marta");
+        listHeader.add("Tamas");
+
+
+
+        List<String> robertData = new ArrayList<>();
+        robertData.add("kitlei@elte.hu");
+        robertData.add("Informatics");
+        robertData.add("kitle.hu");
+
+
+        List<String> martaData = new ArrayList<>();
+        martaData.add("marta@elte.hu");
+        martaData.add("Informatics");
+        martaData.add("marta.hu");
+
+
+
+        List<String> tamasData = new ArrayList<>();
+        tamasData.add("tamas@elte.hu");
+        tamasData.add("Informatics");
+        tamasData.add("tamas.hu");
+
+
+        listHashMap.put(listHeader.get(0), robertData);
+        listHashMap.put(listHeader.get(1), martaData);
+        listHashMap.put(listHeader.get(2), tamasData);
     }
 }
