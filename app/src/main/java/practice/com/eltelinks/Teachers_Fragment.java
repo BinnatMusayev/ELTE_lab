@@ -1,5 +1,6 @@
 package practice.com.eltelinks;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -52,13 +53,13 @@ public class Teachers_Fragment extends Fragment {
         //floating action button
         fab = view.findViewById(R.id.fab);
 
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Here's a Snackbar", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), AddTeacher.class);
+                startActivity(intent);
+            }
+        });
 
         return view;
     }
