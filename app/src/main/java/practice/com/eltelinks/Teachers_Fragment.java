@@ -3,6 +3,7 @@ package practice.com.eltelinks;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +21,8 @@ public class Teachers_Fragment extends Fragment {
     private List<String> listHeader;
     private HashMap<String, List<String>> listHashMap;
 
+    private FloatingActionButton fab;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -29,6 +32,32 @@ public class Teachers_Fragment extends Fragment {
         initData();
         expandableTeachersListAdapter = new ExpandableTeachersListAdapter(getActivity(), listHeader, listHashMap);
         expandableListView.setAdapter(expandableTeachersListAdapter);
+
+        //for animation
+        expandableListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
+
+            @Override
+            public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
+                if (expandableListView.isGroupExpanded(groupPosition))
+                    expandableListView.collapseGroup(groupPosition);
+                else
+                    expandableListView.expandGroup(groupPosition, true);
+                return true;
+            }
+
+        });
+
+
+        //floating action button
+        fab = view.findViewById(R.id.fab);
+
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Snackbar.make(view, "Here's a Snackbar", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
+//            }
+//        });
 
         return view;
     }

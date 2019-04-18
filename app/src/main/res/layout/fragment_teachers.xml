@@ -1,25 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent"
-    android:orientation="vertical">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
 
     <TextView
+        android:id="@+id/teacher_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TEACHERS"
         android:textColor="@color/black"
         android:textSize="15sp"
-        android:layout_gravity="center"
         android:layout_margin="20dp"
+        android:layout_centerHorizontal="true"
         />
 
     <ExpandableListView
         android:id="@+id/teachers_expandable_list_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/teacher_title"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:groupIndicator="@drawable/custom_expandable"
         >
 
     </ExpandableListView>
 
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_add_white_24dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="40dp"
+        android:layout_marginRight="20dp"
+        />
 
-</LinearLayout>
+
+</RelativeLayout>
