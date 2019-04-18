@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/teacher_lg_bg"
+    android:orientation="vertical"
+    android:layout_marginBottom="1dp"
+    >
+
+    <!--<View-->
+        <!--android:id="@+id/item_divider"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="1dp"-->
+        <!--android:layout_marginBottom="16dp"-->
+        <!--android:background="#D3D3D3" />-->
+
+    <TextView
+        android:id="@+id/teacher_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorWhite"
+        android:textSize="20sp"
+        android:padding="10dp"
+        android:paddingBottom="3dp"
+        tools:text="Léon: The Professional" />
+
+    <LinearLayout
+        android:id="@+id/sub_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/colorWhite"
+        android:paddingLeft="10dp">
+
+        <TextView
+            android:id="@+id/teacher_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:layout_marginTop="5dp"
+            tools:text="Email" />
+
+        <TextView
+            android:id="@+id/teacher_faculty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:layout_marginTop="5dp"
+            tools:text="Faculty" />
+
+        <TextView
+            android:id="@+id/teacher_website"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textColor="@color/website_link"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            tools:text="website.com" />
+    </LinearLayout>
+</LinearLayout>

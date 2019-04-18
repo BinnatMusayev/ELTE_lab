@@ -14,19 +14,18 @@
         android:layout_margin="20dp"
         android:layout_centerHorizontal="true"
         />
-
-    <ExpandableListView
-        android:id="@+id/teachers_expandable_list_view"
+    
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/teachers_recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_below="@+id/teacher_title"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:groupIndicator="@drawable/custom_expandable"
         >
-
-    </ExpandableListView>
+    </android.support.v7.widget.RecyclerView>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"

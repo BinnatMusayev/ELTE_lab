@@ -39,8 +39,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //setting inital fragment
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                    new Teachers_Fragment()).commit();
-            navigationView.setCheckedItem(R.id.teachers);
+                    new Websites_Fragment()).commit();
+            navigationView.setCheckedItem(R.id.websites);
         }
     }
 

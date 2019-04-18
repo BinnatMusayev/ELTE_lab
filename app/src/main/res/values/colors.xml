@@ -7,4 +7,5 @@
     <color name="navigation_bg">#FFFFFF</color>
     <color name="black">#000000</color>
     <color name="teacher_lg_bg">#00725F</color>
+    <color name="website_link">#038DC5</color>
 </resources>
