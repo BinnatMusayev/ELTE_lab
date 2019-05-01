@@ -5,10 +5,42 @@
 
 
     <TextView
+        android:id="@+id/websites_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="WEBSITES"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:layout_margin="20dp"
+        android:layout_centerHorizontal="true"/>
+
+    <GridView
+        android:id="@+id/websites_grid"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:columnWidth="90dp"
+        android:horizontalSpacing="10dp"
+        android:verticalSpacing="10dp"
+        android:numColumns="auto_fit"
+        android:layout_alignTop="@+id/websites_title"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="30dp"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"/>
+        />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_websites"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_add_white_24dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="40dp"
+        android:layout_marginRight="20dp"
+        />
+
+
 
 </RelativeLayout>
