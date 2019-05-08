@@ -1,4 +1,4 @@
-package practice.com.eltelinks;
+package practice.com.eltelinks.adapters;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -9,15 +9,12 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import practice.com.eltelinks.R;
 import practice.com.eltelinks.model.Teacher;
 
 public class TeacherRecyclerViewAdapter extends RecyclerView.Adapter<TeacherRecyclerViewAdapter.TeacherViewHolder> {
 
     private List<Teacher> teachers;
-
-    public TeacherRecyclerViewAdapter(List<Teacher> teachers) {
-        this.teachers = teachers;
-    }
 
     @NonNull
     @Override
@@ -46,6 +43,11 @@ public class TeacherRecyclerViewAdapter extends RecyclerView.Adapter<TeacherRecy
                     notifyItemChanged(pos);
                 }
             });
+    }
+
+    public void setTeachers(List<Teacher> teachers){
+        this.teachers = teachers;
+        notifyDataSetChanged();
     }
 
 

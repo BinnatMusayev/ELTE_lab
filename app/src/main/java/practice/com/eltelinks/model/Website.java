@@ -1,5 +1,6 @@
 package practice.com.eltelinks.model;
 
+// add this to database anootation also
 public class Website {
 
     private int id;

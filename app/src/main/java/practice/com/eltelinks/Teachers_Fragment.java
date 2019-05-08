@@ -1,5 +1,7 @@
 package practice.com.eltelinks;
 
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -12,23 +14,24 @@ import android.support.v7.widget.SimpleItemAnimator;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ExpandableListView;
-
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
+import practice.com.eltelinks.adapters.TeacherRecyclerViewAdapter;
 import practice.com.eltelinks.model.Teacher;
+import practice.com.eltelinks.view_model.TeacherViewModel;
 
 public class Teachers_Fragment extends Fragment {
 
     //RecyclerView Stuff
     private RecyclerView recyclerView;
     private TeacherRecyclerViewAdapter adapter;
-    private List<Teacher> teachers;
 
     //Floating Action Button
     private FloatingActionButton fab;
+
+    //ViewMode
+    private TeacherViewModel teacherViewModel;
 
     @Nullable
     @Override
@@ -36,10 +39,8 @@ public class Teachers_Fragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_teachers, container, false);
 
         //RecyclerViewStuff
-        teachers = new ArrayList<>();
-        initData();
 
-        adapter = new TeacherRecyclerViewAdapter(teachers);
+        adapter = new TeacherRecyclerViewAdapter();
 
         recyclerView = view.findViewById(R.id.teachers_recycler_view);
 
@@ -61,20 +62,17 @@ public class Teachers_Fragment extends Fragment {
             }
         });
 
+
+        //view model
+        teacherViewModel = ViewModelProviders.of(this).get(TeacherViewModel.class);
+        teacherViewModel.getAllTeachers().observe(getActivity(), new Observer<List<Teacher>>() {
+            @Override
+            public void onChanged(@Nullable List<Teacher> teachers) {
+                adapter.setTeachers(teachers);
+            }
+        });
+
+
         return view;
-    }
-
-    private void initData(){
-        teachers.add(new Teacher("kitleiii", "kit@gmail.com", "informatics", "kit.com"));
-        teachers.add(new Teacher("tamas", "tam@gmail.com", "informatics", "tam.com"));
-        teachers.add(new Teacher("marta", "mar@gmail.com", "informatics", "mar.com"));
-        teachers.add(new Teacher("melinda", "mel@gmail.com", "informatics", "mel.com"));
-        teachers.add(new Teacher("marta", "mar@gmail.com", "informatics", "mar.com"));
-        teachers.add(new Teacher("marta", "mar@gmail.com", "informatics", "mar.com"));
-        teachers.add(new Teacher("marta", "mar@gmail.com", "informatics", "mar.com"));
-        teachers.add(new Teacher("marta", "mar@gmail.com", "informatics", "mar.com"));
-        teachers.add(new Teacher("marta", "mar@gmail.com", "informatics", "mar.com"));
-        teachers.add(new Teacher("marta", "mar@gmail.com", "informatics", "mar.com"));
-
     }
 }

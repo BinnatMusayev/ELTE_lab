@@ -1,7 +1,13 @@
 package practice.com.eltelinks.model;
 
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
+import android.arch.persistence.room.PrimaryKey;
+
+@Entity(tableName = "teachers")
 public class Teacher {
 
+    @PrimaryKey(autoGenerate = true)
     private int id;
     private String name;
     private String email;
@@ -9,7 +15,7 @@ public class Teacher {
     private String website;
 
     // State of the item
-    //set as NotColumn later in db
+    @Ignore
     private boolean expanded;
 
     public Teacher(String name, String email, String faculty, String website) {
@@ -31,32 +37,16 @@ public class Teacher {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getEmail() {
         return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public String getFaculty() {
         return faculty;
     }
 
-    public void setFaculty(String faculty) {
-        this.faculty = faculty;
-    }
-
     public String getWebsite() {
         return website;
-    }
-
-    public void setWebsite(String website) {
-        this.website = website;
     }
 
     public void setExpanded(boolean expanded) {
