@@ -69,6 +69,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new Timetables_Fragment()).commit();
                 break;
+            case R.id.browser:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new Browser_Fragment()).commit();
+                break;
         }
 
         drawerLayout.closeDrawer(GravityCompat.START);
