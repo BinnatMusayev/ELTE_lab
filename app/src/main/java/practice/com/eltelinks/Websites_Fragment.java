@@ -42,7 +42,8 @@ public class Websites_Fragment extends Fragment {
         fab_websites.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //do something here
+                Intent intent = new Intent(getActivity(), AddWebsite.class);
+                startActivity(intent);
             }
         });
 
