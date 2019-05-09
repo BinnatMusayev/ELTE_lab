@@ -39,4 +39,8 @@ dependencies {
     annotationProcessor "android.arch.lifecycle:compiler:$lifecycle_version"
     implementation "android.arch.persistence.room:runtime:$room_version"
     annotationProcessor "android.arch.persistence.room:compiler:$room_version"
+
+    //glide -for images
+    implementation 'com.github.bumptech.glide:glide:4.9.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
 }
