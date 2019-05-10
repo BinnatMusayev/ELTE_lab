@@ -57,6 +57,7 @@ public abstract class ElteLinksDatabase extends RoomDatabase {
 
             websiteDao.addWebsite(new Website("Elte", "https://www.elte.hu"));
             websiteDao.addWebsite(new Website("Canvas", "https://canvas.elte.hu"));
+            websiteDao.addWebsite(new Website("Neptun", "https://neptun.elte.hu"));
             return null;
         }
     }

@@ -53,10 +53,24 @@ public class ElteLinksRepository {
 
     //websites operations
     public void addWebsite(Website website){
-
+        new AddWebsiteAsyncTask(websiteDao).execute(website);
     }
 
     public LiveData<List<Website>> getAllWebsites(){
         return allWebsites;
+    }
+
+    private static class AddWebsiteAsyncTask extends AsyncTask<Website, Void, Void>{
+        private WebsiteDao websiteDao;
+
+        private AddWebsiteAsyncTask(WebsiteDao websiteDao){
+            this.websiteDao = websiteDao;
+        }
+
+        @Override
+        protected Void doInBackground(Website... websites) {
+            websiteDao.addWebsite(websites[0]);
+            return null;
+        }
     }
 }

@@ -2,13 +2,14 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_margin="20dp"
     android:orientation="vertical"
     >
 
     <ImageView
         android:id="@+id/website_logo"
         android:layout_width="match_parent"
-        android:layout_height="90dp"
+        android:layout_height="@dimen/grid_item_width"
         />
 
     <TextView
