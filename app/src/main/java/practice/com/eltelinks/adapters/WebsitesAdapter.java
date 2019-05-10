@@ -11,22 +11,29 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
+import java.util.List;
+
 import practice.com.eltelinks.R;
 import practice.com.eltelinks.model.Website;
 
 public class WebsitesAdapter extends BaseAdapter {
 
     private Context context;
-    private Website[] websites;
+    private List<Website> websites;
 
-    public WebsitesAdapter(Context context, Website[] websites) {
+    public WebsitesAdapter(Context context, List<Website> websites) {
         this.context = context;
         this.websites = websites;
     }
 
+    public void setWebsites(List<Website> websiteList){
+        this.websites = websiteList;
+        notifyDataSetChanged();
+    }
+
     @Override
     public int getCount() {
-        return websites.length;
+        return websites == null? 0 : websites.size();
     }
 
     @Override
@@ -42,7 +49,7 @@ public class WebsitesAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        Website website = websites[position];
+        Website website = websites.get(position);
 
         if (convertView == null) {
             final LayoutInflater layoutInflater = LayoutInflater.from(context);
@@ -55,7 +62,7 @@ public class WebsitesAdapter extends BaseAdapter {
 
         Drawable defaultLogo = context.getResources().getDrawable(R.drawable.temp_logo);
         Glide.with(context)
-                .load("https://elte.hu/favicon.ico")
+                .load(website.getLogo())
                 .centerCrop()
                 .error(defaultLogo)
                 .into(imageView);

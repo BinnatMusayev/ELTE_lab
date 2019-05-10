@@ -9,15 +9,17 @@ import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 
 import practice.com.eltelinks.dao.TeacherDAO;
+import practice.com.eltelinks.dao.WebsiteDao;
 import practice.com.eltelinks.model.Teacher;
 import practice.com.eltelinks.model.Website;
 
-@Database(entities = {Teacher.class}, version = 1)
+@Database(entities = {Teacher.class, Website.class}, version = 1)
 public abstract class ElteLinksDatabase extends RoomDatabase {
 
     private static ElteLinksDatabase instance;
 
     public abstract TeacherDAO teacherDao();
+    public abstract WebsiteDao websiteDao();
 
     public static synchronized ElteLinksDatabase getInstance(Context context){
         if (instance == null){
@@ -41,15 +43,20 @@ public abstract class ElteLinksDatabase extends RoomDatabase {
 
     private static class PopulateDbAsyncTask extends AsyncTask<Void, Void, Void>{
         TeacherDAO teacherDAO;
+        WebsiteDao websiteDao;
 
         public PopulateDbAsyncTask(ElteLinksDatabase elteLinksDatabase){
             this.teacherDAO = elteLinksDatabase.teacherDao();
+            this.websiteDao = elteLinksDatabase.websiteDao();
         }
 
         @Override
         protected Void doInBackground(Void... voids) {
             teacherDAO.addTeacher(new Teacher("Kitlei Roberts", "kitlei@elte.hu", "Informatics", "kitlei.hu"));
             teacherDAO.addTeacher(new Teacher("Melinda Toth", "melinda@elte.hu", "Informatics", "melinda.hu"));
+
+            websiteDao.addWebsite(new Website("Elte", "https://www.elte.hu"));
+            websiteDao.addWebsite(new Website("Canvas", "https://canvas.elte.hu"));
             return null;
         }
     }
