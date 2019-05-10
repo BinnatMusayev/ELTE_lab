@@ -13,6 +13,7 @@ import android.view.MenuItem;
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawerLayout;
+    private NavigationView navigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +25,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setSupportActionBar(toolbar);
 
         drawerLayout = findViewById(R.id.drawer_layout);
-        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         //for colors to make affect
         navigationView.setItemIconTintList(null);
@@ -70,12 +71,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         new Timetables_Fragment()).commit();
                 break;
             case R.id.browser:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new Browser_Fragment()).commit();
+                openBrowser("https://www.elte.hu");
                 break;
         }
 
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public void openBrowser(String url){
+        Bundle bundle = new Bundle();
+        bundle.putString("chosenURL", url);
+        // set Fragmentclass Arguments
+        Browser_Fragment bf = new Browser_Fragment();
+        bf.setArguments(bundle);
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                bf).commit();
+        navigationView.setCheckedItem(R.id.browser);
     }
 }

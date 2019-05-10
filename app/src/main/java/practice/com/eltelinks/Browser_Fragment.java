@@ -30,8 +30,12 @@ public class Browser_Fragment extends Fragment {
             }
         });
 
-
-        webView.loadUrl("https://www.elte.hu/en/");
+        String url = getArguments().getString("chosenURL");
+        if (url != null){
+            webView.loadUrl(url);
+        }else {
+            webView.loadUrl("https://www.elte.hu/en/");
+        }
 
 
         return view;
