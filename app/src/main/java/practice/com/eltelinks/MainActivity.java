@@ -80,6 +80,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     public void openBrowser(String url){
+        if (!url.startsWith("http")){
+            url = "http://" + url;
+        }
         Bundle bundle = new Bundle();
         bundle.putString("chosenURL", url);
         // set Fragmentclass Arguments

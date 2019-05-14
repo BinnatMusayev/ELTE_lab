@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import practice.com.eltelinks.MainActivity;
 import practice.com.eltelinks.R;
 import practice.com.eltelinks.model.Teacher;
 
@@ -71,6 +72,14 @@ public class TeacherRecyclerViewAdapter extends RecyclerView.Adapter<TeacherRecy
             faculty = itemView.findViewById(R.id.teacher_faculty);
             website = itemView.findViewById(R.id.teacher_website);
             subItem = itemView.findViewById(R.id.sub_item);
+
+            final View v = itemView;
+            website.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ((MainActivity)v.getContext()).openBrowser(website.getText().toString());
+                }
+            });
 
         }
 

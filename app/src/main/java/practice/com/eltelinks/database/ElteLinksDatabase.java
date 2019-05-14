@@ -52,12 +52,20 @@ public abstract class ElteLinksDatabase extends RoomDatabase {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            teacherDAO.addTeacher(new Teacher("Kitlei Roberts", "kitlei@elte.hu", "Informatics", "kitlei.hu"));
-            teacherDAO.addTeacher(new Teacher("Melinda Toth", "melinda@elte.hu", "Informatics", "melinda.hu"));
+            teacherDAO.addTeacher(new Teacher("Kitlei Róbert", "kitlei@elte.hu", "Informatics", "http://kitlei.web.elte.hu"));
+
 
             websiteDao.addWebsite(new Website("Elte", "https://www.elte.hu"));
             websiteDao.addWebsite(new Website("Canvas", "https://canvas.elte.hu"));
-            websiteDao.addWebsite(new Website("Neptun", "https://neptun.elte.hu"));
+            websiteDao.addWebsite(new Website("Questura", "https://qter.elte.hu"));
+            websiteDao.addWebsite(new Website("Neptun", "https://hallgato.neptun.elte.hu"));
+            websiteDao.addWebsite(new Website("Master", "http://csmsc.elte.hu"));
+            websiteDao.addWebsite(new Website("Bachelor", "http://csbsc.elte.hu"));
+            websiteDao.addWebsite(new Website("Facebook", "https://www.facebook.com/elteinternational"));
+            websiteDao.addWebsite(new Website("Instagram", "https://www.instagram.com/elte_official"));
+            websiteDao.addWebsite(new Website("Twitter", "https://twitter.com/eotvos_uni"));
+            websiteDao.addWebsite(new Website("LinkedIn", "https://www.linkedin.com/company/elte-faculty-of-informatics/"));
+
             return null;
         }
     }
