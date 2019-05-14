@@ -10,25 +10,26 @@ import android.view.ViewGroup;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ProgressBar;
+
+import practice.com.eltelinks.helper.CustonWebViewClient;
 
 public class Browser_Fragment extends Fragment {
     private WebView webView;
+    private ProgressBar progressBar;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_browser, container, false);
 
+        progressBar = view.findViewById(R.id.wv_progress);
         webView = view.findViewById(R.id.website_view);
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
-        WebViewClient webViewClient = new WebViewClient();
-        webView.setWebViewClient(new WebViewClient(){
-            @Override
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                view.loadUrl(url);
-                return true;
-            }
-        });
+
+        CustonWebViewClient webViewClient = new CustonWebViewClient(progressBar);
+        webView.setWebViewClient(webViewClient);
+
 
         String url = getArguments().getString("chosenURL");
         if (url != null){
