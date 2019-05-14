@@ -67,8 +67,12 @@ public class WebsitesAdapter extends BaseAdapter {
                 .error(defaultLogo)
                 .into(imageView);
 
-        //later get these from database
-        textView.setText(website.getTitle());
+        if (website.getTitle().length() > 6){
+            String shortTitle = website.getTitle().substring(0, 5) + "...";
+            textView.setText(shortTitle);
+        }else{
+            textView.setText(website.getTitle());
+        }
 
         return convertView;
     }

@@ -4,6 +4,7 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Patterns;
 import android.view.View;
@@ -28,6 +29,10 @@ public class AddWebsite extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_website);
+
+        //setting action bar
+        Toolbar toolbar = findViewById(R.id.toolbar_add_website);
+        setSupportActionBar(toolbar);
 
         submit = findViewById(R.id.add_ws_submit);
         cancel = findViewById(R.id.add_ws_cancel);
