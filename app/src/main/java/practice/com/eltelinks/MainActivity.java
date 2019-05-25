@@ -9,11 +9,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
+    private ImageView trashIcon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +46,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     new Websites_Fragment()).commit();
             navigationView.setCheckedItem(R.id.websites);
         }
+
+        trashIcon = findViewById(R.id.trash);
     }
 
     @Override
@@ -92,5 +97,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                 bf).commit();
         navigationView.setCheckedItem(R.id.browser);
+    }
+
+    public void showTrashIcon(){
+      trashIcon.setVisibility(View.VISIBLE);
+    }
+
+    public void hideTrashIcon(){
+        trashIcon.setVisibility(View.GONE);
     }
 }
