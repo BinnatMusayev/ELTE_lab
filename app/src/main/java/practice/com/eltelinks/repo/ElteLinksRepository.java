@@ -73,4 +73,22 @@ public class ElteLinksRepository {
             return null;
         }
     }
+
+    public void deleteWebsite(Website website){
+        new DeleteWebsiteAsyncTask(websiteDao).execute(website);
+    }
+
+    private static class DeleteWebsiteAsyncTask extends AsyncTask<Website, Void, Void>{
+        private WebsiteDao websiteDao;
+
+        private DeleteWebsiteAsyncTask(WebsiteDao websiteDao){
+            this.websiteDao = websiteDao;
+        }
+
+        @Override
+        protected Void doInBackground(Website... websites) {
+            websiteDao.deleteWebsite(websites[0]);
+            return null;
+        }
+    }
 }

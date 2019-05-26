@@ -48,6 +48,8 @@ public class Websites_Fragment extends Fragment {
     //View Model
     private WebsiteViewModel websiteViewModel;
 
+    private Website selectedWebsite;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -117,6 +119,7 @@ public class Websites_Fragment extends Fragment {
 
                 // Instantiates the drag shadow builder.
                 ImageView imageView = websitesAdapter.getWebsiteLogo(position);
+                selectedWebsite = websiteViewModel.getAllWebsites().getValue().get(position);
                 View.DragShadowBuilder myShadow = new MyDragShadowBuilder(getActivity(), imageView);
 
                 // Starts the drag
@@ -245,8 +248,8 @@ public class Websites_Fragment extends Fragment {
 
 
 
-                    TextView t = getActivity().findViewById(R.id.websites_title);
-                    t.setText("X: " +touchPosition.x + ", Y: "+ touchPosition.y);
+//                    TextView t = getActivity().findViewById(R.id.websites_title);
+//                    t.setText("X: " +touchPosition.x + ", Y: "+ touchPosition.y);
                     if (touchPosition.x>ib.getX()-ib.getWidth() && touchPosition.x <ib.getX()+ib.getWidth()*2
                             && touchPosition.y >ib.getY()+ib.getHeight() ){
                         ib.setImageResource(R.drawable.ic_delete_forever_black_24dp);
@@ -266,6 +269,14 @@ public class Websites_Fragment extends Fragment {
 
                 case DragEvent.ACTION_DROP:
 
+                    touchPosition = getTouchPositionFromDragEvent(v, event);
+
+                    if (touchPosition.x>ib.getX()-ib.getWidth() && touchPosition.x <ib.getX()+ib.getWidth()*2
+                            && touchPosition.y >ib.getY()+ib.getHeight() ){
+                        websiteViewModel.deleteWebsite(selectedWebsite);
+                        Toast.makeText(getActivity(), "Deleted: " + selectedWebsite.getTitle(), Toast.LENGTH_SHORT).show();
+                    }
+
                     // Invalidates the view to force a redraw
                     v.invalidate();
 
@@ -273,11 +284,9 @@ public class Websites_Fragment extends Fragment {
                     return true;
 
                 case DragEvent.ACTION_DRAG_ENDED:
-//                    touchPosition = getTouchPositionFromDragEvent(v, event);
 //
-                    TextView t2 = getActivity().findViewById(R.id.websites_title);
-                    t2.setText(t2.getText().toString() + "||| " +ib.getX()+", "+ib.getY());
-//                    t2.setText(String.valueOf(isTouchInsideOfView(ib2, touchPosition)));
+//                    TextView t2 = getActivity().findViewById(R.id.websites_title);
+//                    t2.setText(t2.getText().toString() + "||| " +ib.getX()+", "+ib.getY());
 
 
                     trashAnimation = ObjectAnimator.ofFloat(ib, "y", ib.getY()+500);

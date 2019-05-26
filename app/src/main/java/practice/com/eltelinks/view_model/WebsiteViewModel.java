@@ -26,6 +26,10 @@ public class WebsiteViewModel extends AndroidViewModel {
         repo.addWebsite(website);
     }
 
+    public void deleteWebsite(Website website){
+        repo.deleteWebsite(website);
+    }
+
     public LiveData<List<Website>>  getAllWebsites(){
         return repo.getAllWebsites();
     }
