@@ -22,26 +22,21 @@ import android.view.DragEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.ScaleAnimation;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
-
-import java.util.ArrayList;
 import java.util.List;
 
 import practice.com.eltelinks.adapters.WebsitesAdapter;
-import practice.com.eltelinks.model.Teacher;
 import practice.com.eltelinks.model.Website;
 import practice.com.eltelinks.view_model.WebsiteViewModel;
 
 public class Websites_Fragment extends Fragment {
 
     private GridView gridView;
+    private WebsitesAdapter websitesAdapter;
     //Floating Action Button
     private FloatingActionButton fab_websites;
 
@@ -58,7 +53,7 @@ public class Websites_Fragment extends Fragment {
         websiteViewModel = ViewModelProviders.of(this).get(WebsiteViewModel.class);
 
         gridView = view.findViewById(R.id.websites_grid);
-        final WebsitesAdapter websitesAdapter = new WebsitesAdapter(getActivity(), websiteViewModel.getAllWebsites().getValue());
+        websitesAdapter = new WebsitesAdapter(getActivity(), websiteViewModel.getAllWebsites().getValue());
         gridView.setAdapter(websitesAdapter);
 
         websiteViewModel.getAllWebsites().observe(getActivity(), new Observer<List<Website>>() {
