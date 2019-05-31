@@ -8,6 +8,12 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 
+import io.reactivex.Completable;
+import io.reactivex.CompletableObserver;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Action;
+import io.reactivex.schedulers.Schedulers;
 import practice.com.eltelinks.dao.TeacherDAO;
 import practice.com.eltelinks.dao.WebsiteDao;
 import practice.com.eltelinks.model.Teacher;
@@ -37,37 +43,70 @@ public abstract class ElteLinksDatabase extends RoomDatabase {
         @Override
         public void onCreate(@NonNull SupportSQLiteDatabase db) {
             super.onCreate(db);
-            new PopulateDbAsyncTask(instance).execute();
+            Completable.fromAction(new Action() {
+                @Override
+                public void run() throws Exception {
+                    populate();
+                }
+            })
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeOn(Schedulers.io())
+                    .subscribe(new CompletableObserver() {
+                        @Override
+                        public void onSubscribe(Disposable d) {
+
+                        }
+
+                        @Override
+                        public void onComplete() {
+
+                        }
+
+                        @Override
+                        public void onError(Throwable e) {
+
+                        }
+                    });
+
+//            new PopulateDbAsyncTask(instance).execute();
         }
     };
 
-    private static class PopulateDbAsyncTask extends AsyncTask<Void, Void, Void>{
-        TeacherDAO teacherDAO;
-        WebsiteDao websiteDao;
+//    private static class PopulateDbAsyncTask extends AsyncTask<Void, Void, Void>{
+//        TeacherDAO teacherDAO;
+//        WebsiteDao websiteDao;
+//
+//        public PopulateDbAsyncTask(ElteLinksDatabase elteLinksDatabase){
+//            this.teacherDAO = elteLinksDatabase.teacherDao();
+//            this.websiteDao = elteLinksDatabase.websiteDao();
+//        }
+//
+//        @Override
+//        protected Void doInBackground(Void... voids) {
+//            populate();
+//
+//            return null;
+//        }
+//
+//
+//    }
 
-        public PopulateDbAsyncTask(ElteLinksDatabase elteLinksDatabase){
-            this.teacherDAO = elteLinksDatabase.teacherDao();
-            this.websiteDao = elteLinksDatabase.websiteDao();
-        }
-
-        @Override
-        protected Void doInBackground(Void... voids) {
-            teacherDAO.addTeacher(new Teacher("Kitlei Róbert", "kitlei@elte.hu", "Informatics", "http://kitlei.web.elte.hu"));
+    private static void populate() {
+        TeacherDAO teacherDAO = instance.teacherDao();
+        WebsiteDao websiteDao = instance.websiteDao();
+        teacherDAO.addTeacher(new Teacher("Kitlei Róbert", "kitlei@elte.hu", "Informatics", "http://kitlei.web.elte.hu"));
 
 
-            websiteDao.addWebsite(new Website("Elte", "https://www.elte.hu"));
-            websiteDao.addWebsite(new Website("Canvas", "https://canvas.elte.hu"));
-            websiteDao.addWebsite(new Website("Questura", "https://qter.elte.hu"));
-            websiteDao.addWebsite(new Website("Neptun", "https://hallgato.neptun.elte.hu"));
-            websiteDao.addWebsite(new Website("Master", "http://csmsc.elte.hu"));
-            websiteDao.addWebsite(new Website("Bachelor", "http://csbsc.elte.hu"));
-            websiteDao.addWebsite(new Website("Facebook", "https://www.facebook.com/elteinternational"));
-            websiteDao.addWebsite(new Website("Instagram", "https://www.instagram.com/elte_official"));
-            websiteDao.addWebsite(new Website("Twitter", "https://twitter.com/eotvos_uni"));
-            websiteDao.addWebsite(new Website("LinkedIn", "https://www.linkedin.com/company/elte-faculty-of-informatics/"));
-
-            return null;
-        }
+        websiteDao.addWebsite(new Website("Elte", "https://www.elte.hu"));
+        websiteDao.addWebsite(new Website("Canvas", "https://canvas.elte.hu"));
+        websiteDao.addWebsite(new Website("Questura", "https://qter.elte.hu"));
+        websiteDao.addWebsite(new Website("Neptun", "https://hallgato.neptun.elte.hu"));
+        websiteDao.addWebsite(new Website("Master", "http://csmsc.elte.hu"));
+        websiteDao.addWebsite(new Website("Bachelor", "http://csbsc.elte.hu"));
+        websiteDao.addWebsite(new Website("Facebook", "https://www.facebook.com/elteinternational"));
+        websiteDao.addWebsite(new Website("Instagram", "https://www.instagram.com/elte_official"));
+        websiteDao.addWebsite(new Website("Twitter", "https://twitter.com/eotvos_uni"));
+        websiteDao.addWebsite(new Website("LinkedIn", "https://www.linkedin.com/company/elte-faculty-of-informatics/"));
     }
 
 }
