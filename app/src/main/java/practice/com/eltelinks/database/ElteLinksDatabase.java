@@ -68,28 +68,8 @@ public abstract class ElteLinksDatabase extends RoomDatabase {
                         }
                     });
 
-//            new PopulateDbAsyncTask(instance).execute();
         }
     };
-
-//    private static class PopulateDbAsyncTask extends AsyncTask<Void, Void, Void>{
-//        TeacherDAO teacherDAO;
-//        WebsiteDao websiteDao;
-//
-//        public PopulateDbAsyncTask(ElteLinksDatabase elteLinksDatabase){
-//            this.teacherDAO = elteLinksDatabase.teacherDao();
-//            this.websiteDao = elteLinksDatabase.websiteDao();
-//        }
-//
-//        @Override
-//        protected Void doInBackground(Void... voids) {
-//            populate();
-//
-//            return null;
-//        }
-//
-//
-//    }
 
     private static void populate() {
         TeacherDAO teacherDAO = instance.teacherDao();
