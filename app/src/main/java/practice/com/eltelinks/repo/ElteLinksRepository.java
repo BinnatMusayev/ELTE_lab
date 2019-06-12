@@ -5,7 +5,15 @@ import android.arch.lifecycle.LiveData;
 import android.os.AsyncTask;
 
 import java.util.List;
+import java.util.concurrent.Callable;
 
+import io.reactivex.Completable;
+import io.reactivex.CompletableObserver;
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Action;
+import io.reactivex.schedulers.Schedulers;
 import practice.com.eltelinks.dao.TeacherDAO;
 import practice.com.eltelinks.dao.WebsiteDao;
 import practice.com.eltelinks.database.ElteLinksDatabase;
@@ -29,66 +37,99 @@ public class ElteLinksRepository {
     }
 
     //Teachers operations
-    public void addTeacher(Teacher teacher){
-        new AddTeacherAsyncTask(teacherDAO).execute(teacher);
+    public void addTeacher(final Teacher teacher){
+
+        Completable.fromAction(new Action() {
+            @Override
+            public void run() throws Exception {
+                teacherDAO.addTeacher(teacher);
+            }
+        })
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new CompletableObserver() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+                });
+
     }
 
     public LiveData<List<Teacher>> getAllTeachers(){
         return allTeachers;
     }
 
-    private static class AddTeacherAsyncTask extends AsyncTask<Teacher, Void, Void>{
-        private TeacherDAO teacherDAO;
-
-        private AddTeacherAsyncTask(TeacherDAO teacherDAO){
-            this.teacherDAO = teacherDAO;
-        }
-
-        @Override
-        protected Void doInBackground(Teacher... teachers) {
-            teacherDAO.addTeacher(teachers[0]);
-            return null;
-        }
-    }
-
     //websites operations
     public void addWebsite(Website website){
-        new AddWebsiteAsyncTask(websiteDao).execute(website);
+        Completable.fromAction(new Action() {
+            @Override
+            public void run() throws Exception {
+                websiteDao.addWebsite(website);
+            }
+        })
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new CompletableObserver() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+                });
     }
 
     public LiveData<List<Website>> getAllWebsites(){
         return allWebsites;
     }
 
-    private static class AddWebsiteAsyncTask extends AsyncTask<Website, Void, Void>{
-        private WebsiteDao websiteDao;
 
-        private AddWebsiteAsyncTask(WebsiteDao websiteDao){
-            this.websiteDao = websiteDao;
-        }
-
-        @Override
-        protected Void doInBackground(Website... websites) {
-            websiteDao.addWebsite(websites[0]);
-            return null;
-        }
-    }
 
     public void deleteWebsite(Website website){
-        new DeleteWebsiteAsyncTask(websiteDao).execute(website);
+        Completable.fromAction(new Action() {
+            @Override
+            public void run() throws Exception {
+                websiteDao.deleteWebsite(website);
+            }
+        })
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new CompletableObserver() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+                });
     }
 
-    private static class DeleteWebsiteAsyncTask extends AsyncTask<Website, Void, Void>{
-        private WebsiteDao websiteDao;
 
-        private DeleteWebsiteAsyncTask(WebsiteDao websiteDao){
-            this.websiteDao = websiteDao;
-        }
-
-        @Override
-        protected Void doInBackground(Website... websites) {
-            websiteDao.deleteWebsite(websites[0]);
-            return null;
-        }
-    }
 }
